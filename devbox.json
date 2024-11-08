@@ -1,0 +1,13 @@
+{
+  "packages": {
+    "python3": "latest",
+    "poetry":  "latest",
+    "go-task": "latest"
+  },
+  "shell": {
+    "init_hook": [
+      "poetry install",
+      "poetry run black --check ."
+    ]
+  }
+}

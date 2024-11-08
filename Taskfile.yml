@@ -1,0 +1,9 @@
+version: "3"
+
+tasks:
+  www:
+    cmds:
+      - cd www && poetry run reflex run
+  format:
+    cmds:
+      - poetry run black .

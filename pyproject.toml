@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "techbuddy"
+version = "0.1.0"
+description = ""
+authors = ["Bogdan <bogdan.caliman112@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+reflex = "^0.6.4"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.10.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
