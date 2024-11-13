@@ -10,6 +10,7 @@ python = "^3.12"
 reflex = "^0.6.4"
 fastapi = {extras = ["standard"], version = "^0.115.4"}
 uvicorn = {extras = ["standard"], version = "^0.32.0"}
+pyjwt = "^2.9.0"
 
 
 [tool.poetry.group.dev.dependencies]

@@ -4,6 +4,9 @@ tasks:
   www:
     cmds:
       - cd www && poetry run reflex run
+  server:
+    cmds:
+      - cd server && poetry run fastapi dev main.py
   format:
     cmds:
       - poetry run black .
