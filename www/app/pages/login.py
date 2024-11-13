@@ -1,86 +1,72 @@
 import reflex as rx
-import requests
+from app.layouts.auth_layout import auth_layout
+from app.components.labeled_input import labeled_input
+# import requests
 
-# Endpoint URL of the FastAPI server
-API_URL = "http://127.0.0.1:8000/login"
+# API_URL = "http://127.0.0.1:8000/login"
 
-# State class to manage login state and handle the API call
-class LoginState(rx.State):
-    email: str = ""
-    name: str = ""
-    password: str = ""
-    login_message: str = ""
+# class LoginState(rx.State):
+#     email: str = ""
+#     name: str = ""
+#     password: str = ""
+#     login_message: str = ""
     
-    # Use LocalStorage to store JWT token between pages
-    jwt_token: str = rx.LocalStorage(name="auth_token", sync=True)
+#     jwt_token: str = rx.LocalStorage(name="auth_token", sync=True)
 
-    def handle_login(self):
-        """Function to handle login API call."""
-        login_data = {
-            "email": self.email,
-            "name": self.name,
-            "password": self.password,
-        }
+#     def handle_login(self):
+#         """Function to handle login API call."""
+#         login_data = {
+#             "email": self.email,
+#             "name": self.name,
+#             "password": self.password,
+#         }
 
-        try:
-            # Make a POST request to the login endpoint
-            response = requests.post(API_URL, json=login_data)
+#         try:
+#             response = requests.post(API_URL, json=login_data)
             
-            if response.status_code == 200:
-                # Extract the JWT token from cookies or response JSON, depending on the implementation
-                self.jwt_token = response.cookies.get("access_token") or response.json().get("token")
-                self.login_message = "Login successful!"
-            else:
-                self.login_message = f"Login failed: {response.json().get('detail', 'Unknown error')}"
-        except Exception as e:
-            self.login_message = f"An error occurred: {str(e)}"
+#             if response.status_code == 200:
+#                 self.jwt_token = response.cookies.get("access_token") or response.json().get("token")
+#                 self.login_message = "Login successful!"
+#             else:
+#                 self.login_message = f"Login failed: {response.json().get('detail', 'Unknown error')}"
+#         except Exception as e:
+#             self.login_message = f"An error occurred: {str(e)}"
     
-    def logout(self):
-        """Clear the token and log out."""
-        self.jwt_token = ""  # This removes the token from LocalStorage
-        self.login_message = "Logged out successfully"
+#     def logout(self):
+#         self.jwt_token = ""  
+#         self.login_message = "Logged out successfully"
 
-# Login component
+# def labeled_input(label: str, placeholder: str, input_type: str = "text") -> rx.Component:
+#     return rx.box(
+#         rx.text(label),
+#         rx.input(
+#             placeholder=placeholder,
+#             type=input_type,
+#             size="3",
+#         ),
+#     )
+
 def login() -> rx.Component:
-    return rx.container(
-        rx.flex(
-            rx.heading("Login"),
-            rx.box(
-                rx.text("Email"),
-                rx.input(
-                    placeholder="john-doe@email.com",
-                    type="email",
-                    size="3",
-                    on_change=LoginState.set_email,
+    return auth_layout(
+        title="Login",
+        form_content=[
+            labeled_input("Email", "john-doe@email.com", "email"),
+            labeled_input("Password", "******", "password"),
+            rx.box(    
+                rx.text("Don't have an account? "),
+                rx.flex(
+                    rx.link("Sign Up", href="/signup", color=rx.color("blue", 11), text_decoration="underline"),
+                    rx.spacer(),
+                    rx.link("Forgot Password?", href="/forgot-password", color=rx.color("blue", 11), text_decoration="underline"),
+                    spacing="4",
                 ),
             ),
-            rx.box(
-                rx.text("Name"),
-                rx.input(
-                    placeholder="John",
-                    type="text",
-                    size="3",
-                    on_change=LoginState.set_name,
-                ),
-            ),
-            rx.box(
-                rx.text("Password"),
-                rx.input(
-                    placeholder="******",
-                    type="password",
-                    size="3",
-                    on_change=LoginState.set_password,
-                ),
-            ),
-            rx.button("Login", on_click=LoginState.handle_login),
-            rx.text(LoginState.login_message),
-            spacing="4",
-            direction="column",
-            justify="center",
-            align="center",
-        ),
-        height="100vh",
+        ],
+        button_text="Login"
     )
+
+
+    
 
 # Example protected page
 # def protected_page() -> rx.Component:

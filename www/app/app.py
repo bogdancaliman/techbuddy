@@ -2,7 +2,7 @@
 
 import reflex as rx
 from rxconfig import config
-from .pages.reset_password import reset_password
+from .pages.forgot_password import forgot_password
 from .pages.login import login
 from .pages.signup import signup
 
@@ -13,7 +13,6 @@ class State(rx.State):
 
 
 def index() -> rx.Component:
-    # Welcome Page (Index)
     return rx.container(
         rx.color_mode.button(position="top-right"),
         rx.vstack(
@@ -40,4 +39,4 @@ app = rx.App()
 app.add_page(index)
 app.add_page(login, route="/login")
 app.add_page(signup, route="/signup")
-app.add_page(reset_password, route="/reset-password")
+app.add_page(forgot_password, route="/forgot-password")
