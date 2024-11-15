@@ -2,6 +2,7 @@
 
 import reflex as rx
 from rxconfig import config
+from .pages.chat_page import chat_page
 from .pages.forgot_password import forgot_password
 from .pages.login import login
 from .pages.signup import signup
@@ -54,6 +55,7 @@ from .pages.home import home
 
 app = rx.App()
 app.add_page(home, route="/")
+app.add_page(chat_page, route="/chat")
 app.add_page(login, route="/login")
 app.add_page(signup, route="/signup")
 app.add_page(forgot_password, route="/forgot-password")
