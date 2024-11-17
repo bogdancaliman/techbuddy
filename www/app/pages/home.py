@@ -54,6 +54,18 @@ def home() -> rx.Component:
                 collapsible=True,
                 color_scheme="tomato"
             ),
+            rx.accordion.root(
+                rx.accordion.item(
+                    header="Release notes",
+                    content=rx.box(
+                        rx.heading("Version 0.9.5"),  
+                        rx.text("Release date: 13.6. 2024"),  
+                        info_list(key_points_dict["heading"], key_points_dict["items"])
+                    ),
+                ),
+                collapsible=True,
+                color_scheme="tomato"
+            ),
             align="strech",
             direction="column",
             gap="16px",

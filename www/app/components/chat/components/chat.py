@@ -26,34 +26,38 @@ def message(qa: QA) -> rx.Component:
             ),
             text_align="right",
             margin_top="1em",
+            border_radius="16px",
         ),
         rx.box(
             rx.markdown(
                 qa.answer,
-                background_color=rx.color("accent", 4),
+                background_color=rx.color("orange", 10),
                 color=rx.color("accent", 12),
                 **message_style,
             ),
             text_align="left",
             padding_top="1em",
+            border_radius="16px",
         ),
+        padding_x="8px",
         width="100%",
     )
 
 
-def chatt() -> rx.Component:
+def chat_view() -> rx.Component:
     """List all the messages in a single conversation."""
-    print(State.chats[State.current_chat])
     return rx.vstack(
         rx.box(rx.foreach(State.chats[State.current_chat], message), width="100%"),
         py="8",
-        flex="1",
+        # flex="1",
+        # height="100%",
         width="100%",
         max_width="50em",
         padding_x="4px",
         align_self="center",
         overflow="hidden",
         padding_bottom="5em",
+        # background_color="red"
     )
 
 
@@ -62,7 +66,6 @@ def action_bar() -> rx.Component:
     return rx.center(
         rx.vstack(
             rx.form(
-                # rx.chakra.form_control(
                 rx.hstack(
                     rx.input(
                         rx.input.slot(
@@ -86,27 +89,25 @@ def action_bar() -> rx.Component:
                     align_items="center",
                 ),
                 is_disabled=State.processing,
-                # ),
                 on_submit=State.process_question,
                 reset_on_submit=True,
             ),
-            rx.text(
-                "ReflexGPT may return factually incorrect or misleading responses. Use discretion.",
-                text_align="center",
-                font_size=".75em",
-                color=rx.color("mauve", 10),
-            ),
-            rx.logo(margin_top="-1em", margin_bottom="-1em"),
-            align_items="center",
         ),
+        padding="16px",
+        
+        # backdrop_filter="auto",
+        # backdrop_blur="lg",
+        # border_top=f"1px solid {rx.color('mauve', 3)}",
+        background_color=rx.color("mauve", 2),
+        align_items="stretch",
+        # width="100%",
+        # position="absolute",
+        # bottom="32px",
+        # left="25%",
         position="sticky",
         bottom="0",
         left="0",
-        padding_y="16px",
-        backdrop_filter="auto",
-        backdrop_blur="lg",
-        border_top=f"1px solid {rx.color('mauve', 3)}",
-        background_color=rx.color("mauve", 2),
-        align_items="stretch",
-        width="100%",
+        border_radius="16px",
+        # max_width="800px",
+        # margin_x="auto"
     )
