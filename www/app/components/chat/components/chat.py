@@ -76,7 +76,13 @@ def action_bar() -> rx.Component:
                         ),
                         placeholder="Type something...",
                         id="question",
-                        width=["15em", "20em", "45em", "50em", "50em", "50em"],
+                        width=rx.breakpoints(
+                            initial="300px",
+                            sm="500px",
+                            # md="350px",
+                            lg="700px",  
+                        ),
+                        # width=["15em", "20em", "45em", "50em", "50em", "50em"],
                     ),
                     rx.button(
                         rx.cond(

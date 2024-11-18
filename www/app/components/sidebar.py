@@ -25,7 +25,9 @@ def sidebar() -> rx.Component:
             width="100%",
             gap="16px",
         ),
-        width="350px",
+        # background_color="red",
+        height="100%",
+        width="300px",
         padding_y="24px",
         padding_x="16px",
     )
