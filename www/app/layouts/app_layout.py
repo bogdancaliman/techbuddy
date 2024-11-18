@@ -11,7 +11,7 @@ def app_layout(content: rx.Component) -> rx.Component:
             rx.scroll_area(
                 rx.flex(
                     content,
-                    background_color="gray",
+                    # background_color="gray",
                     justify="center",
                     align="between",
                     # width="calc(100vw - 400px)",
